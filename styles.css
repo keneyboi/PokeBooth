@@ -1,0 +1,256 @@
+
+html {
+    font-size : 16px;
+    font-family: "Poppins";
+}
+
+dialog {
+    min-width: 500px;
+    max-width: 700px;
+    width: 75vw;
+    height: 70vh;
+    border-radius: 1rem;
+    justify-items: center;
+    text-align: center;
+    overflow-x: auto;
+    overflow-y: auto;
+    border: 0.3rem solid #ffe658;
+}
+
+dialog h2 {
+    font-size: 3rem;
+    color: white;
+    margin: 1rem auto 0 ;
+}
+
+dialog p {
+    color: white;
+    margin-top: -0.5rem;
+    margin-bottom: 2rem;
+}
+
+dialog.fire {
+    background: linear-gradient(#fca573,#f7361e, #a90f0f);
+}
+
+dialog.grass {
+    background: linear-gradient(#73fc8a,#2fba47, #09672d);
+}
+
+dialog.water {
+    background: linear-gradient(#73cefc,#2373be, #0a457a);
+}
+dialog::backdrop {
+    background-color: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(4px);
+}
+
+.booth {
+    display: grid;
+    grid-template-row: 1fr 1fr 1fr;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+.camera-box {
+    margin-top: -0.5rem;
+    margin-bottom: 0.5rem;
+    display: grid;
+    justify-items: center;
+}
+
+
+
+#webcam {
+    margin-top: 60px;
+    grid-row: 1;
+    grid-column: 1;
+    height: 230px;
+    width: 348px;
+    background-color: #010205;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.4);
+    transform: scaleX(-1);
+}
+
+#card-overlay {
+    grid-row: 1;
+    grid-column: 1;
+    z-index: 10;
+}
+
+
+body {
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(#010205, #163469);
+    min-height: 100vh;
+}
+
+.nav-bar {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    min-height: 1rem;
+    gap: 1em;
+}
+
+.nav-bar .login {
+    display: block;
+    padding: 1rem;
+    margin: 1rem 1rem 1rem auto;
+}
+
+.nav-bar .login a{
+    text-decoration: none;
+    color: white;
+}
+
+.nav-bar .logo {
+    display: block;
+    margin: 0rem auto 1rem 2rem;
+}
+
+.nav-bar .nav-links {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1rem;
+    text-align: center;
+    list-style: none;
+    padding: 1rem;
+    max-width: 400px;
+    margin: 1rem auto;
+}
+
+
+.nav-bar .nav-links a {
+    text-decoration: none;
+}
+.nav-links a {
+    text-decoration: none;
+    color: white;         
+}
+
+.card img {
+    border: 0.3rem solid white;
+    border-radius: 100%;
+    margin: 0.5rem;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.4);
+}
+
+#fire {
+    background: linear-gradient(#fca573,#f7361e, #a90f0f);
+}
+
+#grass {
+    background: linear-gradient(#73fc8a,#2fba47, #09672d);
+}
+
+#water {
+    background: linear-gradient(#73cefc,#2373be, #0a457a);
+}
+
+#title {
+    margin: 0;
+    color: white;
+    font-size: 5rem;
+    text-align: center;
+}
+
+#title + p {
+    margin: -1rem;
+    text-align: center;
+    color: white;
+}
+
+
+#subtitle {
+    margin: 0;
+    text-align: center;
+    color: white;
+}
+
+#subtitle + p {
+    margin-top: -0.1rem;
+    text-align: center;
+    color: white;
+}
+
+.mock-container {
+    display: flex;
+    height: 500px;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    padding: 1rem;
+    transition: transform 0.3s cubic-bezier(0.5, 1, 0.5, 1);
+    transform-origin: center;
+}
+
+.mock-container:hover {
+    transform: translateX(50px);
+}
+
+.card-container {
+    color: white;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: .5rem;
+    margin: 20px auto;
+    width: min(1100px, 95%);
+}
+
+.card-container .card:hover {
+   transform: scale(1.05);
+}
+
+.card-container .card p {
+    margin-top: -0.5rem;
+}
+
+.card-container .card {
+    border-radius: 1rem;
+    border: .3rem solid #ffe658; 
+    padding: 2rem;
+    margin: 1rem;
+    background-color: #0a1c3b;
+    display: grid;
+    grid-template-rows: auto auto 1fr;
+    justify-items: center;
+    transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+    transform-origin: center;
+    box-shadow: 0px 10px 16px rgba(0, 0, 0, 0.9);
+}
+
+.button-container {
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    gap: 1rem;
+    margin: 1rem auto;
+    padding: 0 8.5rem;
+}
+
+button:active {
+    background-color: #d1bb3f;
+    color: rgb(249, 249, 249);;
+}
+
+button:disabled {
+    background-color: #d3d3d1;
+    color: rgb(139, 139, 139);;
+}
+
+button {
+    border-radius: 1rem;
+    padding: 1rem 3rem;
+    font-size: 1rem;
+    color: rgb(132, 122, 10);
+    font-weight: 700;
+    font-family: inherit;
+    background-color: #ffe658;
+    display: block;
+}
+
+
+
