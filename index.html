@@ -62,26 +62,20 @@
 
 
                 <dialog id="photobooth-modal">
-                    <h2>PokéBooth</h2>
-                    <p>Snap a photo, then customize your card!</p>
+                    <h2 id="modal-title">PokéBooth</h2>
+                    <p id="modal-subtitle">Snap a photo, then customize your card!</p>
                     <div class="booth">
                         <div class="camera-box">
                             <video id="webcam" autoplay playsinline></video>
                             <img id="card-overlay" src="res/fire-card.png">
-                            <input type="text" id="card-name-input" value="Greninja">
-                            <input type="text" id="card-hp-input" value="130">
-                            <input type="text" id="card-first-attack" value="Water Shuriken">
-                        <textarea id="card-first-description" rows="3">A move that chu chu chu and chu, it is also chu chu chu chu
-A move that chu chu chu and chu, it is also chu chu chu chu
-A move that chu chu chu and chu, it is also chu chu chu chu
-                        </textarea>
-                        <input type="text" id="card-second-attack" value="Kikikoko Bambalabashi">
-                        
-                        <textarea id="card-second-description" rows="3">A move that chu chu chu and chu, it is also chu chu chu chu
-A move that chu chu chu and chu, it is also chu chu chu chu
-A move that chu chu chu and chu, it is also chu chu chu chu
-                        </textarea>
-                        </div>
+                            <input type="text" id="card-name-input" placeholder="Add Name">
+                            <input type="text" id="card-hp-input" placeholder="143">
+                            <input type="text" id="card-first-attack" placeholder="Water Cannon">
+                            <textarea id="card-first-description" rows="3" placeholder="Search you deck. For each water Pokémon you find, this attack does 10+ damage. Also, this attack does 40 damage to each Pokémon in your opponent's bench."></textarea>
+                            <input type="text" id="card-second-attack" placeholder="Bubble Beam">
+                            
+                            <textarea id="card-second-description" rows="3" placeholder="Flip a coin. If heads, during your opponent's next turn, prevent all damage done to this Pokémon by attacks."></textarea>
+                            </div>
                 
                         <div class="button-container">
                            <button id="shutter">Take a Photo</button>

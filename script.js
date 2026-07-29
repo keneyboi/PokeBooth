@@ -4,8 +4,20 @@ let activeStream = null;
 
 function open(e){
     const theme = e.currentTarget.id;
+    const attOne = document.getElementById('card-first-attack');
+    const attTwo = document.getElementById('card-second-attack');
     modal.classList.remove('Fire', 'Water', 'Grass');
     modal.classList.add(theme);
+    if(theme === "Fire"){
+        attOne.placeholder = "Fire Spin"
+        attTwo.placeholder = "Flamethrower"
+    } else if (theme === "Water"){
+        attOne.placeholder = "Water Cannon"
+        attTwo.placeholder = "Bubble Beam"
+    } else {
+        attOne.placeholder = "Vine Whip"
+        attTwo.placeholder = "Grassy Terrain"
+    }
     openCamera();
     const image = document.getElementById('card-overlay');
     image.src = 'res/' + theme + '-card.png'
