@@ -1,11 +1,11 @@
 const card = document.querySelectorAll('.card')
 const modal = document.getElementById('photobooth-modal')
+let activeStream = null;
 
 function open(e){
     const theme = e.currentTarget.id;
-    modal.classList.remove('fire', 'water', 'grass');
+    modal.classList.remove('Fire', 'Water', 'Grass');
     modal.classList.add(theme);
-    const text = document.getElementById('type').textContent = theme + " Type";
     openCamera();
     const image = document.getElementById('card-overlay');
     image.src = 'res/' + theme + '-card.png'
@@ -26,6 +26,7 @@ modal.addEventListener('click', (lightBox) => {
         lightBox.clientY > dialogDimensions.bottom
     ) {
         modal.close();
+        
     }
 });
 
@@ -33,44 +34,91 @@ const videoElement = document.getElementById('webcam')
 const shutter = document.getElementById('shutter')
 
 async function openCamera(){
+    closeCamera();
+
     try {
         const stream = await navigator.mediaDevices.getUserMedia({
             video: true, audio: false
         });
-
+        activeStream = stream;
         videoElement.srcObject = stream;
     } catch (error){
         alert("Unable to open camera");
     }
 }
 
+async function closeCamera(){
+    if(activeStream){
+        activeStream.getTracks().forEach(track => track.stop());
+        activeStream = null;
+    }
+    if (videoElement) {
+        videoElement.pause();
+        videoElement.srcObject = null;
+    }
+}
 
 
 
 const shutterButton = document.getElementById('shutter');
-const editButton = document.getElementById('edit');
+const saveButton = document.getElementById('save');
 const video = document.getElementById('webcam');
 const cardOverlay = document.getElementById('card-overlay');
 const editBox = document.querySelector('.edit-box');
 const cameraBox = document.querySelector('.camera-box');
 
 shutterButton.addEventListener('click', () => {
-    if(video.paused){
-        video.play();
-        editButton.disabled = true;
-        shutter.textContent = "Take a Photo"
-    } else {
-        video.pause();
-        editButton.disabled = false;
-        shutter.textContent = "Retake"
+    if (shutter.textContent === "Retake") {
+    
+        openCamera();
+        video.style.display = 'block'; 
         
+ 
+        const existingSnapshot = document.getElementById('snapshot-preview');
+        if (existingSnapshot) {
+            existingSnapshot.remove();
+        }
+
+        saveButton.disabled = true;
+        shutter.textContent = "Take a Photo";
+        
+    } else {
+     
+        const snapshotCanvas = document.createElement('canvas');
+        snapshotCanvas.id = 'snapshot-preview';
+        snapshotCanvas.width = 348;
+        snapshotCanvas.height = 240;
+        const snapshotCtx = snapshotCanvas.getContext('2d');
+
+   
+        snapshotCtx.save();
+        snapshotCtx.scale(-1, 1);
+        snapshotCtx.drawImage(video, -348, 0, 348, 240);
+        snapshotCtx.restore();
+
+      
+        closeCamera();
+        video.style.display = 'none';
+        video.parentNode.insertBefore(snapshotCanvas, video);
+
+      
+        saveButton.disabled = false;
+        shutter.textContent = "Retake";
     }    
 });
 
-editButton.addEventListener('click', () => {
+saveButton.addEventListener('click', async () => {
+
+    try {
+        await document.fonts.load('bold 24px PokemonFont');
+    } catch (e) {
+        console.log("Font load wait failed, using fallback");
+    }
+   
     const overlayImg = new Image();
     overlayImg.crossOrigin = 'anonymous';
     overlayImg.src = cardOverlay.src;
+
 
     overlayImg.onload = () => {
        
@@ -80,79 +128,92 @@ editButton.addEventListener('click', () => {
         const ctx = canvas.getContext('2d');
 
     
-        const videoX = 37;      
-        const videoY = 63;     
-        const videoWidth = 348;  
-        const videoHeight = 230;
-        
 
- 
-        const videoRatio = video.videoWidth / video.videoHeight;
-        const targetRatio = videoWidth / videoHeight;
-        
-        let sWidth = video.videoWidth;
-        let sHeight = video.videoHeight;
-        let sX = 0;
-        let sY = 0;
 
-        if (videoRatio > targetRatio) {
-            sWidth = video.videoHeight * targetRatio;
-            sX = (video.videoWidth - sWidth) / 2;
-        } else {
-            sHeight = video.videoWidth / targetRatio;
-            sY = (video.videoHeight - sHeight) / 2;
-        }
 
-        ctx.save();
-        ctx.scale(-1, 1);
-        
-        ctx.drawImage(
-            video, 
-            sX, sY, sWidth, sHeight, 
-            -videoX - videoWidth, videoY, videoWidth, videoHeight
-        );
-        ctx.restore();
+        const existingSnapshot = document.getElementById('snapshot-preview');
+        ctx.drawImage(existingSnapshot, 37, 43, 348, 260);
+      
 
         
         ctx.drawImage(overlayImg, 0, 0, canvas.width, canvas.height);
 
         const nameInput = document.getElementById('card-name-input');
         const hpInput = document.getElementById('card-hp-input');
+        const attOne = document.getElementById('card-first-attack');
+        const attOneDes = document.getElementById('card-first-description');
+        const attTwo = document.getElementById('card-second-attack');
+        const attTwoDes = document.getElementById('card-second-description');
+
+
         const cardTitle = nameInput && nameInput.value.trim() !== "" ? nameInput.value : "My Pokémon";
-        
-
+        const hpValue = hpInput && hpInput.value.trim() !== "" ? hpInput.value.trim() : "50";
+        const attOneValue = attOne && attOne.value.trim() !== "" ? attOne.value : "First Attack";
+        const attTwoValue = attTwo && attTwo.value.trim() !== "" ? attTwo.value : "Second Attack";
+        const attTwoDesValue = attTwoDes && attTwoDes.value.trim() !== "" ? attTwoDes.value : "Second Description";
+       
      
-        ctx.font = 'bold 24px Poppins, sans-serif';
-        ctx.fillStyle = '#222222'; // Dark text color
+        ctx.font = '28px PokemonFont, sans-serif';
+        ctx.fillStyle = '#222222';
         ctx.textBaseline = 'top';
-
-        
         const textX = 105; 
-        const textY = 22; 
+        const textY = 27; 
         ctx.fillText(cardTitle, textX, textY);
 
-        const hpX = 325; 
-        const HpY = 23; 
-        ctx.fillText(hpInput.value, hpX, HpY);
 
-        ctx.font = 'bold 12px Poppins, sans-serif';
+        ctx.font = '26px PokemonFont, sans-serif';
+        ctx.letterSpacing = "-2px";
+        let hpX = 326;
+        if(hpValue.length === 2){
+            hpX = 334;
+        } else if (hpValue.length === 1) {
+            hpX = 346;
+        } else {
+            hpX = 322;
+        }
+         
+        const hpY = 29; 
+        ctx.fillText(hpValue, hpX, hpY);
     
-        ctx.fillText("HP", hpX - 17, HpY + 12);
+        ctx.font = '10px PokemonFont, sans-serif';
+        ctx.letterSpacing = "0px";
+        ctx.fillText("HP", hpX - 13, hpY + 10);
 
-        
+        ctx.font = '22px PokemonFont, sans-serif';
+        let attX = 130;
+        let attY = 325;
+        ctx.fillText(attOneValue, attX, attY);
+        attY = 405;
+        ctx.fillText(attTwoValue, attX, attY);
+
+        ctx.font = '12px sans-serif';
+        attX = 35;
+        attY = 345;
+        const lineHeight = 16;
+        let lines = attOneDes.value.split('\n');
+        lines.forEach((line) => {
+            ctx.fillText(line, attX, attY);
+            attY += lineHeight; 
+        });
+        attY = 425;
+        lines = attTwoDes.value.split('\n');
+        lines.forEach((line) => {
+            ctx.fillText(line, attX, attY);
+            attY += lineHeight; 
+        });
+
         const finalImageURL = canvas.toDataURL('image/png');
         const cameraBox = document.querySelector('.camera-box');
         const editBox = document.querySelector('.edit-box');
         
+        const downloadLink = document.createElement('a');
+        downloadLink.href = finalImageURL;
+        downloadLink.download = 'my-pokemon-card.png';
 
-        editBox.innerHTML = `
-            <div class="result-preview" style="text-align: center;">
-                <h3>Your Pokémon Card Photo!</h3>
-                <img src="${finalImageURL}" alt="Captured PokéBooth Photo" style="width: 100%; border-radius: 8px;">
-                <div style="margin-top: 10px;">
-                    <a href="${finalImageURL}" download="pokebooth-card.png" class="download-btn" style="display:inline-block; padding:8px 16px; background:#ffcb05; color:#2a75bb; font-weight:bold; border-radius:4px; text-decoration:none;">Download Image</a>
-                </div>
-            </div>
-        `;
+    
+        document.body.appendChild(downloadLink);
+        downloadLink.click();
+        document.body.removeChild(downloadLink);
+
     };
 });
