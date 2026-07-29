@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <meta name="viewport" content="width=device-width, initial-scale=0.75">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
@@ -10,6 +11,7 @@
         <script src="script.js" defer></script>
     </head>
     <body>
+    
 
         <nav class="nav-bar">
 
@@ -39,53 +41,62 @@
                 <img src="res/cards-mock.png">
             </div>
 
-            <h2 id="subtitle">Choose your Starter!</h2>
-            <p>Pick a card template</p>
-            <div class="card-container">
-                <div class="card" id="fire" role="button">
-                    <img src="res/fire.png" style="width: 100px;">
-                    <h2>Fire Type</h2>
-                    <p>Channel your inner Charizard! Fire types are all about explosive energy, fierce passion, and burning determination. Pick this theme if you want to bring bold, high-intensity energy and a competitive spark to your photo.</p>
+            <section class="select-section">
+                <div class="select-text-container">
+                    <h2 id="subtitle">Choose your Type!</h2>
+                    <p>Pick a card template</p>
                 </div>
-                <div class="card" id="water" role="button">
-                    <img src="res/water.png" style="width: 100px;">
-                    
-                    <h2>Water Type</h2>
-                    <p>Embrace the cool, fluid adaptability of Greninja or Blastoise. Water types represent deep focus, effortless composure, and a refreshing vibe that can shift from a calm stream to a powerful tidal wave. Perfect for a sleek, relaxed, or playfully fun pose.</p>
-          
-                </div>
-                <div class="card" id="grass" role="button">
-                    <img src="res/grass.png" style="width: 100px;">
-                    <h2>Grass Type</h2>
-                    <p>Get grounded with the vibrant, natural energy of Bulbasaur or Sprigatito. Grass types represent harmony, steady growth, and a resilient, cheerful spirit that thrives in nature. Choose this if you want bright smiles, peaceful vibes, and pure organic charm.</p>
-                </div>
-
-
-                <dialog id="photobooth-modal">
-                    <h2 id="modal-title">PokéBooth</h2>
-                    <p id="modal-subtitle">Snap a photo, then customize your card!</p>
-                    <div class="booth">
-                        <div class="camera-box">
-                            <video id="webcam" autoplay playsinline></video>
-                            <img id="card-overlay" src="res/fire-card.png">
-                            <input type="text" id="card-name-input" placeholder="Add Name">
-                            <input type="text" id="card-hp-input" placeholder="143">
-                            <input type="text" id="card-first-attack" placeholder="Water Cannon">
-                            <textarea id="card-first-description" rows="3" placeholder="Search you deck. For each water Pokémon you find, this attack does 10+ damage."></textarea>
-                            <input type="text" id="card-second-attack" placeholder="Bubble Beam">
-                            
-                            <textarea id="card-second-description" rows="3" placeholder="Flip a coin. If heads, during your opponent's next turn, prevent all damage done to this Pokémon by attacks."></textarea>
-                            </div>
-                
-                        <div class="button-container">
-                           <button id="shutter">Take a Photo</button>
-                            <button id="save" disabled><img src="res/download_icon.png"></button> 
+                <div class="card-container">
+                    <div class="card" id="fire" role="button">
+                        <img src="res/fire.png" style="width: 100px;">
+                        <div class="right-column">
+                            <h2>Fire Type</h2>
+                            <p>Channel your inner Charizard! Fire types are all about explosive energy, fierce passion, and burning determination.</p>
                         </div>
                     </div>
-                    
-                </dialog>
-            </div>
+                    <div class="card" id="water" role="button">
+                        <img src="res/water.png" style="width: 100px;">
+                        <div class="right-column">
+                        <h2>Water Type</h2>
+                        <p>Embrace the cool, fluid adaptability of Blastoise. Water types represent deep focus and a refreshing vibe.</p>
+                        </div>
+                    </div>
+                    <div class="card" id="grass" role="button">
+                        <img src="res/grass.png" style="width: 100px;">
+                        <div class="right-column">
+                        <h2>Grass Type</h2>
+                        <p>Get grounded with the vibrant, natural energy of Venasaur. Grass types represent harmony, and a cheerful spirit. </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            
         </main>
-       
+        <dialog id="photobooth-modal">
+            <div class="modal-container">
+                <h2 id="modal-title">PokéBooth</h2>
+                <p id="modal-subtitle">Snap a photo, then customize your card!</p>
+                <div class="booth">
+                    <div class="camera-box">
+                        <video id="webcam" autoplay playsinline></video>
+                        <img id="card-overlay" src="res/fire-card.png">
+                        <input type="text" id="card-name-input" placeholder="Add Name">
+                        <input type="text" id="card-hp-input" placeholder="143">
+                        <input type="text" id="card-first-attack" placeholder="Water Cannon">
+                        <textarea id="card-first-description" rows="3" placeholder="Search you deck. For each water Pokémon you find, this attack does 10+ damage."></textarea>
+                        <input type="text" id="card-second-attack" placeholder="Bubble Beam">
+                        
+                        <textarea id="card-second-description" rows="3" placeholder="Flip a coin. If heads, during your opponent's next turn, prevent all damage done to this Pokémon by attacks."></textarea>
+                        </div>
+            
+                    <div class="button-container">
+                    <button id="shutter">Take a Photo</button>
+                        <button id="save" disabled><img src="res/download_icon.png"></button> 
+                    </div>
+                </div>
+            </div>
+        </dialog>
+
     </body>
 </html>

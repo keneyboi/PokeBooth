@@ -1,6 +1,8 @@
 const card = document.querySelectorAll('.card')
-const modal = document.getElementById('photobooth-modal')
+const modal = document.getElementById('photobooth-modal');
+
 let activeStream = null;
+
 
 function open(e){
     const theme = e.currentTarget.id;
@@ -26,7 +28,6 @@ function open(e){
 
 card.forEach(card =>{
     card.addEventListener('click', open)
-
 });
 
 modal.addEventListener('click', (lightBox) => {
@@ -38,7 +39,6 @@ modal.addEventListener('click', (lightBox) => {
         lightBox.clientY > dialogDimensions.bottom
     ) {
         modal.close();
-        
     }
 });
 
@@ -138,10 +138,6 @@ saveButton.addEventListener('click', async () => {
         canvas.width = overlayImg.naturalWidth;
         canvas.height = overlayImg.naturalHeight;
         const ctx = canvas.getContext('2d');
-
-    
-
-
 
         const existingSnapshot = document.getElementById('snapshot-preview');
         ctx.drawImage(existingSnapshot, 37, 43, 348, 260);
