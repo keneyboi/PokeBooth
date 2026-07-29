@@ -6,12 +6,12 @@ function open(e){
     const theme = e.currentTarget.id;
     const attOne = document.getElementById('card-first-attack');
     const attTwo = document.getElementById('card-second-attack');
-    modal.classList.remove('Fire', 'Water', 'Grass');
+    modal.classList.remove('fire', 'water', 'grass');
     modal.classList.add(theme);
-    if(theme === "Fire"){
+    if(theme === "fire"){
         attOne.placeholder = "Fire Spin"
         attTwo.placeholder = "Flamethrower"
-    } else if (theme === "Water"){
+    } else if (theme === "water"){
         attOne.placeholder = "Water Cannon"
         attTwo.placeholder = "Bubble Beam"
     } else {

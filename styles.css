@@ -36,17 +36,17 @@ dialog p {
     margin-bottom: 2rem;
 }
 
-dialog.Fire {
+dialog.fire {
     background: linear-gradient(#fca573,#f7361e, #a90f0f);
     color: #922929c4;
 }
 
-dialog.Grass {
+dialog.grass {
     background: linear-gradient(#73fc8a,#2fba47, #09672d);
     color: #208547d0;
 }
 
-dialog.Water {
+dialog.water {
     background: linear-gradient(#73cefc,#2373be, #0a457a);
     color: #30538e;
 }
@@ -285,15 +285,15 @@ body {
     box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.4);
 }
 
-#Fire {
+#fire {
     background: linear-gradient(#fca573,#f7361e, #a90f0f);
 }
 
-#Grass {
+#grass {
     background: linear-gradient(#73fc8a,#2fba47, #09672d);
 }
 
-#Water {
+#water {
     background: linear-gradient(#73cefc,#2373be, #0a457a);
 }
 
