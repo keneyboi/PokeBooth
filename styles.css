@@ -188,7 +188,7 @@ dialog::backdrop {
     width: 350px;
     overflow-y: hidden;
     background: none;
-    margin-top: 425px;
+    margin-top: 430px;
     border: none;
     resize: none;
 }
@@ -339,6 +339,11 @@ body {
 
 .mock-container:hover {
     transform: translateX(50px);
+}
+
+.card h2 {
+    font-family: "PokemonFont";
+    font-size: 2rem;
 }
 
 .card-container {
